@@ -1,5 +1,214 @@
 <html>
+	<head>
+		<style>
+			.left-menu {
+			  position: fixed;
+			  top: 0;
+			  left: 0;
+			  width: 20%;
+			  height: 100vh;
+			  background-color: rgb(246, 246, 246);
+			  border-right: 2px solid white;
+			  text-align: center;
+			  font-size: 1.2rem;
+			  transition: left 0.2s linear 0.1s;
+			}
+			
+			.right-menu {
+			  position: fixed;
+			  top: 0;
+			  right: 0;
+			  width: 80%;
+			  height: 100vh;
+			  background-color: rgb(246, 246, 246);
+			  border-right: 2px solid white;
+			  text-align: center;
+			  font-size: 1.2rem;
+			  transition: left 0.2s linear 0.1s;
+			}
+			
+			:root {
+			  font-family: "Courier New", Courier, monospace;
+			}
+			
+			* {
+			  box-sizing: border-box;
+			  overflow: hidden;
+			  color: black;
+			}
+			 
+
+			 
+			/** 导航栏 */
+			.left-menu > div:nth-child(1) {
+			  margin-top: 2rem;
+			  margin-bottom: 1.5rem;
+			  border: 0px;
+			  font-size: 1.4rem;
+			  font-weight: 900;
+			}
+			/** 全部一级菜单 */
+			.menu-item {
+			  padding: 1rem;
+			  width: 100%;
+			  font-weight: 800;
+			  border-radius: 0.3rem;
+			  border-top: 0.1px solid rgb(201, 195, 195);
+			  border-bottom: 0.1px solid rgb(201, 195, 195);
+			}
+			.menu-item:hover {
+			  cursor: pointer;
+			  background-color: rgb(224, 224, 224);
+			}
+			 
+			.bg-color{
+			    background-color: #fecc90;
+			}
+		</style>
+	</head>
 	<body>
+	    <div class="left-menu">
+	        <div>导航栏</div>
+	        <div class="menu-item bg-color" data="tab1">饿了么CK转换</div>
+	        <div class="menu-item" data="tab2">得物果树解密</div>
+	        <div class="menu-item" data="tab3">得物果树加密</div>
+	    </div>
+	    <div class="right-menu">
+		    <div id="tab1" class="content">
+			    饿了么CK:<textarea style="width:50%;height:50px" id="menu1_ipt1"></textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu1_opt1"></textarea>
+			    </br>
+			    <button style="height:50px" id="menu1_btn1">转&nbsp;&nbsp;&nbsp;&nbsp;换</button>
+		    </div>
+		    
+		    <div  id="tab2" class="content" style="display: none;">
+			    Data&nbsp;&nbsp;&nbsp;:<textarea style="width:50%;height:230px" id="menu2_ipt1"></textarea>
+			    </br>
+				A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<textarea style="width:50%;height:50px" id="menu2_ipt2">77E3A91E1A645776EA7D56BBE7A2357BAC6FC6DF6849B987</textarea>
+			    </br>
+				s&nbsp;k&nbsp;s&nbsp;&nbsp;:<textarea style="width:50%;height:50px" id="menu2_ipt3">1,hdw3</textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:200px" id="menu2_opt1"></textarea>
+			    </br>
+			    <button style="height:50px" id="menu2_btn1">转&nbsp;&nbsp;&nbsp;&nbsp;换</button>
+		    </div>
+		    
+		    <div  id="tab3" class="content" style="display: none;">
+			    url&nbsp;&nbsp;&nbsp;:<textarea style="width:50%;height:230px" id="menu3_ipt1"></textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu3_opt1"></textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu3_opt2"></textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu3_opt3"></textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu3_opt4"></textarea>
+			    </br>
+			    输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu3_opt5"></textarea>
+			    </br>
+			    <button style="height:50px" id="menu3_btn1">转&nbsp;&nbsp;&nbsp;&nbsp;换</button>
+		    </div>
+		</div>
 		<script src="./preinforce.js"></script>
+
+	    <script>
+		    // 盗版JQ
+		    function $(str){
+				return document.querySelector(str);
+			}
+
+			tabs = document.getElementsByClassName("menu-item");
+			contents = document.getElementsByClassName("content");
+ 
+		    // 为菜单上色
+		    for(let e of tabs){
+		        e.addEventListener('click',function(){
+		            // 去除其他同类子菜单的背景色
+		            for(let i = 0 ; i < tabs.length ; i ++){
+		                if(tabs[i].classList.contains('bg-color')){
+		                    tabs[i].classList.toggle('bg-color');
+		                }
+		            }
+		            // 为自己添加背景色
+		            e.classList.toggle('bg-color');
+
+					// 隐藏所有内容区域
+					 for (i = 0; i < contents.length; i++) {
+					   contents[i].style.display = "none";
+					 }
+					 document.getElementById(event.target.getAttribute('data')).style.display = "block";
+
+
+		            
+		        })
+		    }
+ 
+	    </script>
+		<script>
+			// 1 sciprt
+			$("#menu1_btn1").onclick = function(){
+				let ck = $("#menu1_ipt1").value
+				let opt1 = ""
+				let row = ck.split("; ");
+				let map = new Map();
+				for(let s of row){
+					let split = s.split("=");
+					map.set(split[0],split[1]);
+				}
+				opt1 += getV(map,"unb");
+		        opt1 += getV(map,"cookie2");
+		        opt1 += getV(map,"USERID");
+		        opt1 += getV(map,"SID");
+				$("#menu1_opt1").value = opt1
+		    }
+		    function getV(map,s){
+			    return s + "=" + map.get(s) + ";";
+		    }
+		</script>
+		<script>
+			$("#menu2_btn1").onclick = function(){
+				let data = $("#menu2_ipt1").value.replace(/\s*/g,"");
+				let A = $("#menu2_ipt2").value
+				let sks = $("#menu2_ipt3").value
+				console.log(data)
+				console.log(A)
+				console.log(sks)
+				let opt1 = window.fun.Fun99(data,A,sks)
+				$("#menu2_opt1").value = opt1
+		    }
+		</script>
+		<script>
+			$("#menu3_btn1").onclick = function(){
+				let url = $("#menu3_ipt1").value
+				let {a,b,c,d,e} = window.fun.Fun110(JSON.stringify(getParams(url)),getUrl(url))
+				$("#menu3_opt1").value = a
+				$("#menu3_opt2").value = b
+				$("#menu3_opt3").value = c
+				$("#menu3_opt4").value = d
+				$("#menu3_opt5").value = e
+		    }
+			
+			function getUrl(url){
+				let regex = /^(.*?)\?/;
+				let match = url.match(regex);
+				if (match) {
+					let contentBeforeQuestionMark = match[1];
+					console.log(contentBeforeQuestionMark);
+				} else {
+					console.log(url)
+				}
+			}
+			function getParams(url){
+				let urlObj = new URL(url);
+				let queryString = urlObj.search;
+				let params = new URLSearchParams(queryString);
+				let paramsObject = {};
+				for (let [key, value] of params.entries()) {
+					paramsObject[key] = value;
+				}
+				return paramsObject;
+			}
+		</script>
 	</body>
 </html>

@@ -85,6 +85,8 @@
 			输&nbsp;&nbsp;&nbsp;&nbsp;出:<textarea style="width:50%;height:50px" id="menu1_opt1"></textarea>
 			</br>
 			<button style="height:50px" id="menu1_btn1">转&nbsp;&nbsp;&nbsp;&nbsp;换</button>
+			<button style="height:50px" id="menu1_btn2">复&nbsp;&nbsp;&nbsp;&nbsp;制</button>
+			<button style="height:50px" id="menu1_btn3">清&nbsp;&nbsp;&nbsp;&nbsp;除</button>
 		</div>
 
 		<div id="tab2" class="content" style="display: none;">
@@ -357,8 +359,48 @@
 			opt1 += getV(map, "SID");
 			$("#menu1_opt1").value = opt1
 		}
+		$("#menu1_btn2").onclick = function () {
+			copyTextToClipboard($("#menu1_opt1").value);
+		}
+		$("#menu1_btn3").onclick = function () {
+			$("#menu1_ipt1").value = ''
+			$("#menu1_opt1").value = ''
+		}
 		function getV(map, s) {
 			return s + "=" + map.get(s) + ";";
+		}
+		function copyTextToClipboard(text) {
+			var textArea = document.createElement("textarea");
+
+			// 隐藏文本域
+			textArea.style.position = 'fixed';
+			textArea.style.top = '0';
+			textArea.style.left = '0';
+			textArea.style.width = '2em';
+			textArea.style.height = '2em';
+			textArea.style.padding = '0';
+			textArea.style.border = 'none';
+			textArea.style.outline = 'none';
+			textArea.style.boxShadow = 'none';
+			textArea.style.background = 'transparent';
+			textArea.value = text;
+
+			document.body.appendChild(textArea);
+			textArea.select();
+
+			try {
+				var successful = document.execCommand('copy');
+				var msg = successful ? 'successful' : 'unsuccessful';
+				$("#menu1_btn2").textContent = '复制成功'
+			} catch (err) {
+				$("#menu1_btn2").textContent = '复制失败'
+			} finally{
+				setTimeout(() => {
+					$("#menu1_btn2").textContent = '复    制'
+				}, 2000);
+			}
+
+			document.body.removeChild(textArea);
 		}
 	</script>
 	<script>
